@@ -25,8 +25,8 @@ int main()
 	{
 		ind++;
 		A[ind] = A[ind-1] + (k2*C[ind-1] - k1*A[ind-1]*B[ind-1])*dt;
-        B[ind] = B[ind-1] + (k2*C[ind-1] - k1*A[ind-1]*B[ind-1])*dt;
-        C[ind] = C[ind-1] + (2*k1*A[ind-1]*B[ind-1] - 2*k2*C[ind-1])*dt;
+        	B[ind] = B[ind-1] + (k2*C[ind-1] - k1*A[ind-1]*B[ind-1])*dt;
+        	C[ind] = C[ind-1] + (2*k1*A[ind-1]*B[ind-1] - 2*k2*C[ind-1])*dt;
 		cout<<i<<"\t\t"<<A[ind]<<"\t\t"<<B[ind]<<"\t\t"<<C[ind]<<endl;
 		mx=max(A[ind],max(B[ind],C[ind]));
 	}
@@ -34,37 +34,35 @@ int main()
 	//Graphics Part:
 
 	int gd=DETECT,gm;
-    initgraph(&gd,&gm,NULL);
+    	initgraph(&gd,&gm,NULL);
 	int x,y,space= 50,ymax,xmax; 
-    ymax = getmaxy();
+    	ymax = getmaxy();
 	xmax=getmaxx();
 
 	// initial x and y coordinate
-    x = (xmax-space)/ind; 
-    y = (ymax-space*4)/(int)mx;
+	x = (xmax-space)/ind; 
+	y = (ymax-space*4)/(int)mx;
 
-    setcolor(9);
-    line(space, 0, space, xmax);   //y-axis
-    line(0, ymax-space, xmax, ymax - space); // x-axis
+	setcolor(9);
+	line(space, 0, space, xmax);   //y-axis
+	line(0, ymax-space, xmax, ymax - space); // x-axis
 
-    for(int j=1,k=space+x; j<=ind; j++,k+=x){
+	for(int j=1,k=space+x; j<=ind; j++,k+=x){
+        	setcolor(15);
+		line(k-x, ymax - space - A[j-1]*y, k, ymax - space - A[j]*y);
+		delay(10);
 
-        setcolor(15);
-        line(k-x, ymax - space - A[j-1]*y, k, ymax - space - A[j]*y);
-        delay(10);
+		setcolor(2);
+		line(k-x, ymax - space - B[j-1]*y, k, ymax - space - B[j]*y);
+		delay(10);
 
-        setcolor(2);
-        line(k-x, ymax - space - B[j-1]*y, k, ymax - space - B[j]*y);
-        delay(10);
+		setcolor(4);
+		line(k-x, ymax - space - C[j-1]*y, k, ymax - space - C[j]*y);
+		delay(10);
+	}
 
-        setcolor(4);
-        line(k-x, ymax - space - C[j-1]*y, k, ymax - space - C[j]*y);
-        delay(10);
-
-    }
-
-    getch();
-    closegraph();
+	getch();
+	closegraph();
 
 
 }
